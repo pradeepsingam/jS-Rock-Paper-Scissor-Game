@@ -11,6 +11,9 @@
             font-family: Arial;
             font-weight: bolder;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .rps-img {
@@ -30,6 +33,18 @@
         .btn-rps-all {
             display: flex;
             justify-content: center;
+        }
+
+        .js-moves {
+            background-color: white;
+            height: 100px;
+            width: 400px;
+            color: black;
+
+        }
+
+        .js-moves-display {
+            height: 100px;
         }
     </style>
 </head>
@@ -51,7 +66,9 @@
     </div>
 
     <p class="js-result"></p>
-    <p class="js-moves"></p>
+    <p class="js-moves">
+        Choose your Move
+    </p>
     <p class="js-score"></p>
 
     <button onclick="
@@ -83,7 +100,7 @@
 
         function playGame(playerMove) {
             const computerMove = pickComputerMove();
-
+            document.querySelector('.js-moves').classList.add('js-moves-display')
             let result = '';
 
             if (playerMove === 'scissors') {
@@ -128,8 +145,20 @@
 
             document.querySelector('.js-result').innerHTML = result;
 
-            document.querySelector('.js-moves').innerHTML = `You ${playerMove} - ${computerMove} Computer`;
+            document.querySelector('.js-moves').innerHTML = `You ${playerMove} -  Computer ${computerMove}`;
+
+            if (computerMove === 'rock') {
+
+                document.querySelector('.js-moves').innerHTML = `<img src="images/1.png"  height="100%"/>`
+            } else if (computerMove === 'paper') {
+                document.querySelector('.js-moves').innerHTML = `<img src="images/3.png"  height="100%"/>`
+            } else {
+                document.querySelector('.js-moves').innerHTML = `<img src="images/2.png"  height="100%"/>`
+
+            }
+
         }
+
 
         function updateScoreElement() {
             document.querySelector('.js-score')
